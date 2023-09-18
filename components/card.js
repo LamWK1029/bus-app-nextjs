@@ -18,12 +18,7 @@ export default function BasicCard(props) {
         <Typography variant="body2">{props.description}</Typography>
       </CardContent>
       <CardActions>
-        <Button
-          size="small"
-          onClick={() => {
-            alert("clicked");
-          }}
-        >
+        <Button size="small" onClick={props.action}>
           Details
         </Button>
       </CardActions>

@@ -49,6 +49,9 @@ export default function Routes(props) {
                   " - " +
                   displayRoutes[index].dest_tc
                 }
+                action={() => {
+                  console.log("clicked");
+                }}
               />
             </div>
           </div>
