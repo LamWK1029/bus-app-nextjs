@@ -10,7 +10,7 @@ export default async function Page({ params }) {
   const serviceType = params.route[2] ? params.route[2] : "N/A";
 
   const routeInfo = await getBusData(
-    "/v1/transport/kmb/route/" + route + "/" + bound + "/" + serviceType
+    "/v1/transport/kmb/route/" + route + "/" + boundc + "/" + serviceType
   );
   console.log("routeInfo", routeInfo);
 
