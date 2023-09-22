@@ -1,25 +1,26 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { FixedSizeList as List } from "react-window";
 import BasicCard from "../../components/card";
 import TextField from "@mui/material/TextField";
 
 export default function Routes(props) {
+  const router = useRouter();
   const [search, setSearch] = useState("");
   const [windowHeight, setWindowHeight] = useState(1000);
-
-  useEffect(() => {
-    setWindowHeight(window.innerHeight);
-  }, []);
-
   const displayRoutes =
     search === ""
       ? props.routes
       : props.routes.filter((route) => route.route.includes(search));
 
+  useEffect(() => {
+    setWindowHeight(window.innerHeight);
+  }, []);
+
   return (
-    <div className="routesPage">
+    <div className="Page">
       <div className="header">
         <h1>Routes</h1>
         <TextField
@@ -30,12 +31,11 @@ export default function Routes(props) {
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
-      {/* react-window */}
       <List
         width={"100%"}
         itemCount={displayRoutes.length}
         itemSize={168}
-        height={windowHeight - 100}
+        height={windowHeight - 152}
       >
         {({ index, style }) => (
           <div style={style}>
@@ -50,7 +50,14 @@ export default function Routes(props) {
                   displayRoutes[index].dest_tc
                 }
                 action={() => {
-                  console.log("clicked");
+                  router.push(
+                    "/routes/" +
+                      displayRoutes[index].route +
+                      "/" +
+                      displayRoutes[index].bound +
+                      "/" +
+                      displayRoutes[index].service_type
+                  );
                 }}
               />
             </div>

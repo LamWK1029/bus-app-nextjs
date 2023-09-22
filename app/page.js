@@ -1,6 +1,6 @@
 import React from "react";
-import { getReq } from "../api/request";
 import Routes from "./routes/page";
+import getBusData from "../api/getBusData";
 
 export default async function Page() {
   const routes = await getKmbBusRouteData();
@@ -10,7 +10,6 @@ export default async function Page() {
 
 // getBusRouteData
 async function getKmbBusRouteData() {
-  const url = "https://data.etabus.gov.hk/v1/transport/kmb/route/";
-  const data = await getReq(url);
-  return data.data;
+  const endpoint = "/v1/transport/kmb/route/";
+  return getBusData(endpoint);
 }
