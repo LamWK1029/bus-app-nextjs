@@ -19,7 +19,7 @@ export default function BasicCard(props) {
       </CardContent>
       <CardActions>
         <Button size="small" onClick={props.action}>
-          Details
+          {props.actionName}
         </Button>
       </CardActions>
     </Card>

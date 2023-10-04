@@ -49,6 +49,7 @@ export default function Routes(props) {
                   " - " +
                   displayRoutes[index].dest_tc
                 }
+                actionName={"Detail"}
                 action={() => {
                   router.push(
                     "/routes/" +
