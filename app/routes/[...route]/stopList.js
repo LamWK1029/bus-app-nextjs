@@ -15,43 +15,29 @@ export default function StopList(props) {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const [windowHeight, setWindowHeight] = useState(1000);
-  useEffect(() => {
-    setWindowHeight(window.innerHeight);
-  }, []);
+  const stopItems = props.stopInfoObjs.map((stopInfoObj) => {
+    return (
+      <Accordion
+        sx={{ width: "95vw" }}
+        expanded={expanded === stopInfoObj.stop}
+        onChange={handleChange(stopInfoObj.stop)}
+      >
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1bh-content"
+          id="panel1bh-header"
+          key={stopInfoObj.stop}
+        >
+          <Typography sx={{ width: "80%", flexShrink: 0 }}>
+            {stopInfoObj.name_tc}
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>{stopInfoObj.name_en}</Typography>
+        </AccordionDetails>
+      </Accordion>
+    );
+  });
 
-  return (
-    <List
-      width={"100%"}
-      itemCount={props.stopInfoObjs.length}
-      itemSize={100}
-      height={windowHeight - 152}
-    >
-      {({ index, style }) => (
-        <div style={style}>
-          <div className="cardView">
-            <Accordion
-              expanded={expanded === props.stopInfoObjs[index].stop}
-              onChange={handleChange(props.stopInfoObjs[index].stop)}
-            >
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel4bh-content"
-                id="panel4bh-header"
-              >
-                <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                  {props.stopInfoObjs[index].name_tc}
-                </Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography>
-                  Nunc vitae orci ultricies, auctor nunc in, volutpat nisl.
-                </Typography>
-              </AccordionDetails>
-            </Accordion>
-          </div>
-        </div>
-      )}
-    </List>
-  );
+  return <div>{stopItems}</div>;
 }
