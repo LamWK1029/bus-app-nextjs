@@ -19,7 +19,7 @@ export default function Routes(props) {
 
   useEffect(() => {
     setWindowHeight(window.innerHeight);
-  }, []);
+  }, [windowHeight]);
 
   return (
     <div className="Page">
@@ -39,6 +39,7 @@ export default function Routes(props) {
         />
       </div>
       <List
+        key={windowHeight}
         width={"100%"}
         itemCount={displayRoutes.length}
         itemSize={168}
