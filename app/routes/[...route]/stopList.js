@@ -75,7 +75,7 @@ export default function StopList(props) {
           id={"panel" + index + "bh-header"}
         >
           <Typography sx={{ width: "80%", flexShrink: 0 }}>
-            {stopInfoObj.name_tc}
+            {index + 1 + ". " + stopInfoObj.name_tc}
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
