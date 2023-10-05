@@ -56,7 +56,7 @@ export default function StopList(props) {
   const remainingTimeItems = eta.map((remainingTime, index) => {
     return (
       <li key={index}>
-        {remainingTime > 0 ? remainingTime + " min" : "Arrived"}
+        {remainingTime > 1 ? remainingTime + " mins" : "Arrived"}
       </li>
     );
   });
