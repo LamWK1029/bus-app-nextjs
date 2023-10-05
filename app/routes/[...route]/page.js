@@ -10,23 +10,20 @@ export default async function Page({ params }) {
     : "N/A";
   const serviceType = params.route[2] ? params.route[2] : "N/A";
 
-  // Get bus stop info
+  // Get info
+  const routeInfo = await getRouteInfo(route, bound, serviceType);
   const stopInfoObjs = [];
   const routeStopsId = await getBusStopList(route, bound, serviceType);
   for (const stopId of routeStopsId) {
     const stopInfoObj = await getBusStopInfo(stopId);
     stopInfoObjs.push(stopInfoObj);
   }
-  const startStop = stopInfoObjs[0].name_tc;
-  const endStop = stopInfoObjs[stopInfoObjs.length - 1].name_tc;
 
   return (
     <div className="Page">
       <div className="header">
         <h3>Route {route}</h3>
-        <h5>
-          {startStop} - {endStop}
-        </h5>
+        <h5>{routeInfo.orig_tc + " - " + routeInfo.dest_tc}</h5>
       </div>
       <StopList
         route={route}
@@ -35,6 +32,13 @@ export default async function Page({ params }) {
       />
     </div>
   );
+}
+
+async function getRouteInfo(route, bound, serviceType) {
+  const routeInfo = await getBusData(
+    "/v1/transport/kmb/route/" + route + "/" + bound + "/" + serviceType
+  );
+  return routeInfo;
 }
 
 async function getBusStopList(route, bound, serviceType) {

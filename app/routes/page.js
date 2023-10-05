@@ -41,7 +41,7 @@ export default function Routes(props) {
       <List
         key={windowHeight}
         width={"100%"}
-        itemCount={displayRoutes.length}
+        itemCount={displayRoutes ? displayRoutes.length : 0}
         itemSize={168}
         height={windowHeight - 152}
       >
