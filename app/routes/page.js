@@ -5,9 +5,11 @@ import React, { useEffect, useState } from "react";
 import { FixedSizeList as List } from "react-window";
 import BasicCard from "../../components/card";
 import TextField from "@mui/material/TextField";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export default function Routes(props) {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [windowHeight, setWindowHeight] = useState(1000);
   const displayRoutes =
@@ -21,6 +23,11 @@ export default function Routes(props) {
 
   return (
     <div className="Page">
+      {loading && (
+        <div className="loading">
+          <CircularProgress />
+        </div>
+      )}
       <div className="header">
         <h1>Routes</h1>
         <TextField
@@ -51,6 +58,7 @@ export default function Routes(props) {
                 }
                 actionName={"Detail"}
                 action={() => {
+                  setLoading(true);
                   router.push(
                     "/routes/" +
                       displayRoutes[index].route +

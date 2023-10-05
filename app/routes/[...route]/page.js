@@ -28,7 +28,11 @@ export default async function Page({ params }) {
           {startStop} - {endStop}
         </h5>
       </div>
-      <StopList stopInfoObjs={stopInfoObjs} />
+      <StopList
+        route={route}
+        serviceType={serviceType}
+        stopInfoObjs={stopInfoObjs}
+      />
     </div>
   );
 }
