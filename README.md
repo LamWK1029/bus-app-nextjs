@@ -1,4 +1,5 @@
 Bus App NextJS
+
 This project, Bus App NextJS, is a Next.js-based web application that provides information about different bus routes. The app allows users to view bus routes and search for specific routes based on their preferences.
 
 Features
