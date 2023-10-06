@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -12,7 +12,19 @@ export default function StopList(props) {
   const [expanded, setExpanded] = useState(false);
   const [eta, setEta] = useState([]);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      updateEta(expanded);
+    }, 60 * 1000);
+    return () => clearInterval(interval);
+  }, [expanded]);
+
   const handleChange = (panel) => (event, isExpanded) => {
+    updateEta(panel);
+    setExpanded(isExpanded ? panel : false);
+  };
+
+  const updateEta = (panel) => {
     const baseUrl = "https://data.etabus.gov.hk";
     const url =
       baseUrl +
@@ -50,7 +62,6 @@ export default function StopList(props) {
       .catch((error) => {
         console.log("error: ", error);
       });
-    setExpanded(isExpanded ? panel : false);
   };
 
   const remainingTimeItems = eta.map((remainingTime, index) => {
